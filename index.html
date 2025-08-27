@@ -6,19 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="x-apple-disable-message-reformatting">
   <meta name="format-detection" content="telephone=no,email=no,address=no">
-  <title>СОГАЗ на BI.ZONE Bug Bounty</title>
+  <title>BI.ZONE Bug Bounty</title>
 
   <!-- Фиксы для iOS и Gmail -->
   <style type="text/css">
+    /* Сброс стандартных margin и padding */
+    body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, div, table {
+      margin:0; 
+      padding:0;
+      border: 0;
+    }
     a[x-apple-data-detectors] {
       color: inherit !important;
       text-decoration: none !important;
     }
+    
+    img { display:block; line-height:0; border:0; outline:none; text-decoration:none; }
+    table { border-collapse:collapse !important; }
+
+    /* Мобильные стили */
     @media only screen and (max-width: 600px) {
       .container { width: 100% !important; max-width: 100% !important; }
       .mobile-padding { padding: 16px !important; }
       .mobile-center { text-align: center !important; }
       img { max-width: 100% !important; height: auto !important; }
+      .button { display:inline-block !important; width:100% !important; box-sizing:border-box; text-align:center !important; }
     }
   </style>
 
@@ -36,168 +48,178 @@
     СОГАЗ запустил программу на BI.ZONE Bug Bounty. Проверь детали и получи до 50 000 рублей за найденные баги!
   </div>
 
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f5f5f5">
-    <tr>
-      <td align="center">
-        <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="container" style="max-width:600px; width:100%; margin:20px auto;">
-          
-          <!-- Шапка с баннером -->
-          <tr>
-            <td>
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                <img src="https://i.postimg.cc/7Lv3SpGZ/sogaz-bugbounty-banner.jpg" width="600" alt="СОГАЗ запускает программу Bug Bounty на платформе BI.ZONE" style="display:block; width:100%; height:auto; border:0;" />
-              </a>
-            </td>
-          </tr>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f5f5f5" style="margin:0; padding:0;">
+    <tbody>
+      <tr>
+        <td align="center">
+          <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="container" style="font-family:Arial, Helvetica, sans-serif; max-width:600px; width:100%; margin:0; padding:0;">
+            <tbody>
+              <!-- Шапка с баннером -->
+              <tr>
+                <td>
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/sogaz-bugbounty-banner.jpg" width="600" alt="СОГАЗ запускает программу Bug Bounty на платформе BI.ZONE" style="display:block; width:100%; height:auto; border:0;" />
+                  </a>
+                </td>
+              </tr>
 
-          <!-- Приветствие и скоуп -->
-          <tr>
-            <td class="mobile-padding" style="color:#141A20; padding:32px 40px 40px; font-family:Arial, Helvetica, sans-serif;">
-              <p style="font-size:16px; line-height:20px; margin:0 0 8px;">Привет!</p>
-              <p style="font-size:16px; line-height:20px; margin:0;">На нашей платформе вышла в паблик программа от СОГАЗа.</p>
-              <div style="border-bottom:1px solid #CBD2DF; margin:40px 0;"></div>
-              <h2 style="font-size:24px; font-weight:bold; margin:0 0 8px;">Скоуп</h2>
-              <p style="font-size:16px; line-height:20px; margin:0;">Скоуп широкий, так что будет где развернуться:</p>
-              <ul style="color:#163BFF; margin:24px 0 0; padding-left:24px;">
-                <li style="margin-bottom:8px;">
-                  <a href="#" style="color:#163BFF; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Страховая платформа</a>
-                </li>
-                <li style="margin-bottom:8px;">
-                  <a href="#" style="color:#163BFF; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Сервис одноразовых ссылок</a>
-                </li>
-                <li style="margin-bottom:8px;">
-                  <a href="#" style="color:#163BFF; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Главная страница официального сайта</a>
-                </li>
-              </ul>
-            </td>
-          </tr>
+              <!-- Приветствие и скоуп -->
+              <tr>
+                <td class="mobile-padding" style="color:#141A20; padding:32px 40px 40px;">
+                  <p style="font-size:16px; line-height:20px; padding-bottom:8px;">Привет!</p>
+                  <p style="font-size:16px; line-height:20px; padding-bottom:40px;">На нашей платформе вышла в паблик программа от СОГАЗа.</p>
+                  <div style="border-bottom:1px solid #CBD2DF;"></div>
+                  <h2 style="font-size:24px; font-weight:bold; padding: 40px 0 8px;">Скоуп</h2>
+                  <p style="font-size:16px; line-height:20px; padding-bottom:24px;">Скоуп широкий, так что будет где развернуться:</p>
+                  <ul style="color:#163BFF; padding-left:24px; padding-bottom:24px;">
+                    <li style="padding-bottom:8px;">
+                      <a href="#" style="color:#163BFF; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Страховая платформа</a>
+                    </li>
+                    <li style="padding-bottom:8px;">
+                      <a href="#" style="color:#163BFF; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Сервис одноразовых ссылок</a>
+                    </li>
+                    <li style="padding-bottom:8px;">
+                      <a href="#" style="color:#163BFF; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Главная страница официального сайта</a>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
 
-          <!-- Блок с вознаграждением -->
-          <tr>
-            <td align="center" class="mobile-padding" style="background-color:#f0f2f6; color:#141A20; padding:32px 40px; font-family:Arial, Helvetica, sans-serif;">
-              <p style="font-size:16px; line-height:20px; margin:0 0 8px;">Максимальное вознаграждение</p>
-              <p style="font-size:32px; font-weight:bold; margin:0 0 24px;">50&nbsp;тысяч рублей</p>
-              
-              <!-- Кнопка Багхантить -->
-              <table border="0" cellspacing="0" cellpadding="0" class="mobile-center">
-                <tr>
-                  <td align="center" bgcolor="#163bff" style="border-radius:4px;">
-                    <!--[if mso]>
-                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="#" style="height:40px; v-text-anchor:middle; width:140px;" arcsize="8%" stroke="f" fillcolor="#163bff">
-                      <w:anchorlock/>
-                      <center style="color:#ffffff; font-family:Arial, sans-serif; font-size:12px; padding:8px 16px;">Багхантить</center>
-                    </v:roundrect>
-                    <![endif]-->
-                    <!--[if !mso]><!-- -->
-                    <a href="#" target="_blank" rel="noopener noreferrer" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:400; line-height:100%; color:#ffffff; text-decoration:none; padding:8px 16px; display:inline-block;">
-                      Багхантить
-                    </a>
-                    <!--<![endif]-->
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+              <!-- Блок с вознаграждением -->
+              <tr>
+                <td align="center" class="mobile-padding" style="background-color:#f0f2f6; color:#141A20; padding:32px 40px;">
+                  <p style="font-size:16px; line-height:20px; padding-bottom:8px;">Максимальное вознаграждение</p>
+                  <p style="font-size:32px; font-weight:bold; padding-bottom:24px;">50&nbsp;тысяч рублей</p>
+                  
+                  <!-- Кнопка Багхантить -->
+                  <table border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin:0; padding:0;">
+                    <tbody>
+                      <tr>
+                        <td align="center" bgcolor="#163bff">
+                          <!--[if mso]>
+                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="#" style="height:40px; v-text-anchor:middle; width:140px;" arcsize="8%" stroke="f" fillcolor="#163bff">
+                            <w:anchorlock/>
+                            <center style="color:#ffffff; font-family:Arial, sans-serif; font-size:12px; padding:8px 16px;">Багхантить</center>
+                          </v:roundrect>
+                          <![endif]-->
+                          <!--[if !mso]><!-- -->
+                          <a href="#" target="_blank" rel="noopener noreferrer" class="button" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:400; line-height:100%; color:#ffffff; text-decoration:none; padding:8px 16px; display:inline-block;">
+                            Багхантить
+                          </a>
+                          <!--<![endif]-->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
 
-          <!-- Описание вендора -->
-          <tr>
-            <td class="mobile-padding" style="color:#141A20; padding:40px 40px 64px; font-family:Arial, Helvetica, sans-serif;">
-              <h2 style="font-size:32px; font-weight:bold; margin:0 0 8px;">Вендор</h2>
-              <p style="font-size:16px; line-height:20px; margin:0;">
-                СОГАЗ — крупнейший в России страховщик федерального уровня, который предоставляет более 100 программ страхования для частных лиц и предприятий.
-              </p>
-            </td>
-          </tr>
+              <!-- Описание вендора -->
+              <tr>
+                <td class="mobile-padding" style="color:#141A20; padding:40px 40px 64px;">
+                  <h2 style="font-size:32px; font-weight:bold; padding-bottom:8px;">Вендор</h2>
+                  <p style="font-size:16px; line-height:20px; padding-bottom:0;">
+                    СОГАЗ — крупнейший в России страховщик федерального уровня, который предоставляет более 100 программ страхования для частных лиц и предприятий.
+                  </p>
+                </td>
+              </tr>
 
-          <!-- Баннер + подписка -->
-          <tr style="background-color:#163BFF; color:#ffffff;">
-            <td align="center" class="mobile-padding" style="padding:18px 0 28px;">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                <img src="https://i.postimg.cc/br60brb7/bugbounty-programs-banner.png" width="600" alt="Программы, выплаты, митапы и прочие багбаунти-радости на BI.ZONE" style="display:block; width:100%; height:auto; border:0;" />
-              </a>
-              
-              <!-- Кнопка Подписаться -->
-              <table border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin-top:16px;">
-                <tr>
-                  <td align="center" bgcolor="#000000" style="border-radius:4px;">
-                    <!--[if mso]>
-                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="#" style="height:32px; v-text-anchor:middle; width:120px;" arcsize="8%" stroke="f" fillcolor="#000000">
-                      <w:anchorlock/>
-                      <center style="color:#ffffff; font-family:Arial, sans-serif; font-size:12px; padding:8px 16px;">Подписаться</center>
-                    </v:roundrect>
-                    <![endif]-->
-                    <!--[if !mso]><!-- -->
-                    <a href="#" target="_blank" rel="noopener noreferrer" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:400; line-height:100%; letter-spacing:0.5px; color:#ffffff; text-decoration:none; padding:8px 16px; display:inline-block;">
-                      Подписаться
-                    </a>
-                    <!--<![endif]-->
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+              <!-- Баннер + подписка -->
+              <tr style="background-color:#163BFF; color:#ffffff;">
+                <td align="center" class="mobile-padding" style="padding:18px 0 28px;">
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bugbounty-programs-banner.png" width="600" alt="Программы, выплаты, митапы и прочие багбаунти-радости на BI.ZONE" style="display:block; width:100%; height:auto; border:0;" />
+                  </a>
+                  
+                  <!-- Кнопка Подписаться -->
+                  <table border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin:0; padding:0;">
+                    <tbody>
+                      <tr>
+                        <td align="center" bgcolor="#000000">
+                          <!--[if mso]>
+                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="#" style="height:32px; v-text-anchor:middle; width:120px;" arcsize="8%" stroke="f" fillcolor="#000000">
+                            <w:anchorlock/>
+                            <center style="color:#ffffff; font-family:Arial, sans-serif; font-size:12px; padding:8px 16px;">Подписаться</center>
+                          </v:roundrect>
+                          <![endif]-->
+                          <!--[if !mso]><!-- -->
+                          <a href="#" target="_blank" rel="noopener noreferrer" class="button" style="font-size:12px; font-weight:400; line-height:100%; letter-spacing:0.5px; color:#ffffff; text-decoration:none; padding:8px 16px; display:inline-block;">
+                            Подписаться
+                          </a>
+                          <!--<![endif]-->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
 
-          <!-- Футер -->
-          <tr>
-            <td bgcolor="#000000" style="padding:30px; color:#ffffff; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:20px;">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr valign="top">
-                  <td align="left" style="font-size:12px; line-height:20px; color:#ffffff;">
-                    <p style="margin:0 0 10px;">Технические вопросы:
-                      <a href="#" style="color:#ffffff; border-bottom: 1px solid #ffffff; text-decoration: none;">bb@bi.zone</a>
-                    </p>
-                    <p style="margin:0 0 20px;">
-                      <a href="#" target="_blank" rel="noopener noreferrer" style="color:#ffffff; border-bottom: 1px solid #ffffff; text-decoration: none;">Политика конфиденциальности</a>
-                    </p>
-                  </td>
-                  <td align="right">
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      <img src="https://i.postimg.cc/wj12XXw0/bi-zone-logo.png" alt="BI.ZONE" width="135" height="24" style="display:block; border:0;">
-                    </a>
-                  </td>
-                </tr>
-              </table>
+              <!-- Футер -->
+              <tr>
+                <td bgcolor="#000000" style="padding:30px; color:#ffffff; font-size:14px; line-height:20px;">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
+                    <tbody>
+                      <tr valign="top">
+                        <td align="left" style="font-size:12px; line-height:20px; color:#ffffff;">
+                          <p style="padding-bottom:10px;">Технические вопросы:
+                            <a href="#" style="color:#ffffff; border-bottom: 1px solid #ffffff; text-decoration: none;">bb@bi.zone</a>
+                          </p>
+                          <p style="padding-bottom:20px;">
+                            <a href="#" target="_blank" rel="noopener noreferrer" style="color:#ffffff; border-bottom: 1px solid #ffffff; text-decoration: none;">Политика конфиденциальности</a>
+                          </p>
+                        </td>
+                        <td align="right">
+                          <a href="#" target="_blank" rel="noopener noreferrer">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-logo.png" alt="BI.ZONE" width="135" height="24" style="display:block; border:0;">
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-              <p style="margin:0 0 8px;">BI.ZONE в соцсетях</p>
-              <table border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td style="padding-right:14px;">
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      <img src="https://i.postimg.cc/CKD4tFT8/bi-zone-telegram.png" alt="BI.ZONE в Telegram" width="32" style="display:block; border:0;">
-                    </a>
-                  </td>
-                  <td style="padding-right:14px;">
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      <img src="https://i.postimg.cc/DZTc3tnM/bi-zone-vk.png" alt="BI.ZONE в VK" width="32" style="display:block; border:0;">
-                    </a>
-                  </td>
-                  <td style="padding-right:14px;">
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      <img src="https://i.postimg.cc/j544xZjd/bi-zone-youtube.png" alt="BI.ZONE в YouTube" width="32" style="display:block; border:0;">
-                    </a>
-                  </td>
-                  <td style="padding-right:14px;">
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      <img src="https://i.postimg.cc/L8GTNJ7R/bi-zone-habr.png" alt="BI.ZONE в Habr" width="32" style="display:block; border:0;">
-                    </a>
-                  </td>
-                  <td>
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      <img src="https://i.postimg.cc/ZK7jv7xW/bi-zone-linkedin.png" alt="BI.ZONE в LinkedIn" width="32" style="display:block; border:0;">
-                    </a>
-                  </td>
-                </tr>
-              </table>
+                  <p style="padding-bottom:8px;">BI.ZONE в соцсетях</p>
+                  <table border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
+                    <tbody>
+                      <tr>
+                        <td style="padding-right:14px;">
+                          <a href="#" target="_blank" rel="noopener noreferrer">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-telegram.png" alt="BI.ZONE в Telegram" width="32" style="display:block; border:0;">
+                          </a>
+                        </td>
+                        <td style="padding-right:14px;">
+                          <a href="#" target="_blank" rel="noopener noreferrer">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-vk.png" alt="BI.ZONE в VK" width="32" style="display:block; border:0;">
+                          </a>
+                        </td>
+                        <td style="padding-right:14px;">
+                          <a href="#" target="_blank" rel="noopener noreferrer">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-youtube.png" alt="BI.ZONE в YouTube" width="32" style="display:block; border:0;">
+                          </a>
+                        </td>
+                        <td style="padding-right:14px;">
+                          <a href="#" target="_blank" rel="noopener noreferrer">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-habr.png" alt="BI.ZONE в Habr" width="32" style="display:block; border:0;">
+                          </a>
+                        </td>
+                        <td>
+                          <a href="#" target="_blank" rel="noopener noreferrer">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-linkedin.png" alt="BI.ZONE в LinkedIn" width="32" style="display:block; border:0;">
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-              <p style="margin:40px 0 0;">
-                <a href="#" target="_blank" rel="noopener noreferrer" style="color:#565B66; border-bottom: 1px solid #565B66; text-decoration: none;">Отписаться от рассылки</a>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+                  <p style="padding-top:40px;">
+                    <a href="#" target="_blank" rel="noopener noreferrer" style="color:#565B66; border-bottom: 1px solid #565B66; text-decoration: none;">Отписаться от рассылки</a>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
   </table>
-
 </body>
 </html>
