@@ -11,17 +11,19 @@
   <!-- Фиксы для iOS и Gmail -->
   <style type="text/css">
     /* Сброс стандартных margin и padding */
-    body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, div, table {
+    body, div, table {
       margin:0; 
       padding:0;
       border: 0;
     }
-    a[x-apple-data-detectors] {
+    a[x-apple-data-detectors],
+    a[href^="tel"],
+    a[href^="mailto"] {
       color: inherit !important;
       text-decoration: none !important;
+      border-bottom: none !important;
     }
-    
-    img { display:block; line-height:0; border:0; outline:none; text-decoration:none; }
+    img { display:block; line-height:0; border:none; outline:none; text-decoration:none; }
     table { border-collapse:collapse !important; }
 
     /* Мобильные стили */
@@ -30,7 +32,7 @@
       .mobile-padding { padding: 16px !important; }
       .mobile-center { text-align: center !important; }
       img { max-width: 100% !important; height: auto !important; }
-      .button { display: inline-block !important; width:100% !important; box-sizing: border-box; text-align: center !important; }
+      .button { display: block !important; width: 100% !important; box-sizing: border-box; text-align: center !important; }
     }
   </style>
 
@@ -38,11 +40,20 @@
   <!--[if mso]>
     <style type="text/css">
       body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
+
+      /* Для того чтобы в Outlook не ломались GIF/JPG при ресайзе */
+      img { -ms-interpolation-mode:bicubic; }
+
+      /* Сброс дефолтного стиля гиперссылок в Outlook (Word) */
+      a, a:link, a:visited { text-decoration: none !important; }
+      span.MsoHyperlink, span.MsoHyperlinkFollowed {
+        color: inherit !important;
+        text-decoration: none !important;
+      }
     </style>
   <![endif]-->
 </head>
-<body bgcolor="#f5f5f5" style="margin:0; padding:0; -webkit-text-size-adjust:none; -ms-text-size-adjust:100%; text-size-adjust:100%; background-color:#f5f5f5;">
-
+<body bgcolor="#f5f5f5" style="margin:0; padding:0; -webkit-text-size-adjust:none; -ms-text-size-adjust:100%; -moz-text-size-adjust:100%; text-size-adjust:100%; background-color:#f5f5f5;">
   <!-- Preheader -->
   <div style="display:none; max-height:0; overflow:hidden; font-family:Arial, Helvetica, sans-serif; font-size:1px; color:#f5f5f5; line-height:1px; opacity:0;">
     СОГАЗ запустил программу на BI.ZONE Bug Bounty. Проверь детали и получи до 50 000 рублей за найденные баги!
@@ -50,67 +61,89 @@
   </div>
 
   <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f5f5f5" style="margin:0; padding:0; background-color:#f5f5f5;">
-    <tbody>
-      <tr>
-        <td align="center">
-          <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="container" style="background-color:#ffffff; max-width:600px; width:100%; margin:0; padding:0;">
-            <tbody>
-              <!-- Шапка с баннером -->
-              <tr>
-                <td>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/sogaz-bugbounty-banner.jpg" width="600" height="250" alt="СОГАЗ запускает программу Bug Bounty на платформе BI.ZONE" style="display:block; width:100%; height:auto; border:0; -ms-interpolation-mode:bicubic;" />
-                  </a>
-                </td>
-              </tr>
+    <tr>
+      <td align="center">
+        <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="container" style="background-color:#ffffff; max-width:600px; width:100%; margin:0; padding:0;">
+          <!-- Шапка с баннером -->
+          <tr>
+            <td>
+              <a href="#" target="_blank" rel="noopener noreferrer">
+                <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/sogaz-bugbounty-banner.jpg" width="600" height="250" alt="СОГАЗ запускает программу Bug Bounty на платформе BI.ZONE" style="display:block; width:100%; height:auto; border:none; -ms-interpolation-mode:bicubic;" />
+              </a>
+            </td>
+          </tr>
 
-              <!-- Приветствие и скоуп -->
-              <tr>
-                <td class="mobile-padding" style="color:#141A20; padding:32px 40px 40px;">
-                  <p style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; padding-bottom:8px;">Привет!</p>
-                  <p style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; padding-bottom:40px;">На нашей платформе вышла в паблик программа от СОГАЗа.</p>
-                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
-                    <tr>
-                      <td style="border-bottom:2px solid #CBD2DF; line-height:1px; font-size:0;">&nbsp;</td>
-                    </tr>
-                  </table>
-                  <p style="font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; padding:40px 0 8px;">Скоуп</p>
-                  <p style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; padding-bottom:24px;">Скоуп широкий, так что будет где развернуться:</p>
-
-                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
-                    <tr>
-                      <td align="center" style="color:#163BFF; font-size:16px; line-height:20px; text-align:center; padding:0 0 8px 5px;">&bull;</td>
-                      <td style="padding:0 0 8px 5px;">
-                        <a href="#" style="color:#163BFF; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Страховая платформа</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="center" style="color:#163BFF; font-size:16px; line-height:20px; text-align:center; padding:0 0 8px 5px;">&bull;</td>
-                      <td style="padding:0 0 8px 5px;">
-                        <a href="#" style="color:#163BFF; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Сервис одноразовых ссылок</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="center" style="color:#163BFF; font-size:16px; line-height:20px; text-align:center; padding-left:5px;">&bull;</td>
-                      <td style="padding-left:2px;">
-                          <a href="#" style="color:#163BFF; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Главная страница официального сайта</a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-
-              <!-- Блок с вознаграждением -->
-              <tr>
-                <td align="center" class="mobile-padding" style="background-color:#f0f2f6; color:#141A20; padding:32px 40px;">
-                  <p style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; padding-bottom:8px;">Максимальное вознаграждение</p>
-                  <p style="font-family:Arial, Helvetica, sans-serif; font-size:32px; font-weight:bold; padding-bottom:24px;">50&nbsp;тысяч рублей</p>
-                  
-                  <!-- Кнопка Багхантить -->
-                  <table border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin:0; padding:0;">
-                    <tbody>
+          <!-- Приветствие и скоуп -->
+          <tr>
+            <td class="mobile-padding" style="padding:32px 40px 40px;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
+                <tr>
+                  <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; color:#141A20; padding-bottom:8px;">Привет!</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; color:#141A20; padding-bottom:40px;">На нашей платформе вышла в паблик программа от СОГАЗа.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <!-- Линия -->
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
                       <tr>
-                        <td align="center" bgcolor="#163bff" style="background-color:#163bff;">
+                        <td style="color:#CBD2DF; border-bottom:2px solid #CBD2DF; line-height:1px; font-size:0;">&nbsp;</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:bold; color:#141A20; padding:40px 0 8px;">Скоуп</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; color:#141A20; padding-bottom:24px;">Скоуп широкий, так что будет где развернуться:</td>
+                </tr>
+                <tr>
+                  <td>
+                    <!-- Маркированный список -->
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
+                      <tr valign="top">
+                        <td style="color:#163BFF; font-size:16px; line-height:20px; text-align:center; padding:0 0 8px 5px;">&bull;</td>
+                        <td style="padding:0 0 8px 5px;">
+                          <a href="#" style="color:#163BFF; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Страховая платформа</a>
+                        </td>
+                      </tr>
+                      <tr valign="top">
+                        <td style="color:#163BFF; font-size:16px; line-height:20px; text-align:center; padding:0 0 8px 5px;">&bull;</td>
+                        <td style="padding:0 0 8px 5px;">
+                          <a href="#" style="color:#163BFF; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Сервис одноразовых ссылок</a>
+                        </td>
+                      </tr>
+                      <tr valign="top">
+                        <td style="color:#163BFF; font-size:16px; line-height:20px; text-align:center; padding-left:5px;">&bull;</td>
+                        <td style="padding-left:5px;">
+                            <a href="#" style="color:#163BFF; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; text-decoration:none;" target="_blank" rel="noopener noreferrer">Главная страница официального сайта</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Блок с вознаграждением -->
+          <tr>
+            <td class="mobile-padding" style="background-color:#f0f2f6; padding:32px 40px;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin:0; padding:0;">
+                <tr>
+                  <td align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; color:#141A20; text-align:center; padding-bottom:8px;">Максимальное вознаграждение</td>
+                </tr>
+                <tr>
+                  <td align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:32px; font-weight:bold; color:#141A20; text-align:center; padding-bottom:24px;">50&nbsp;тысяч рублей</td>
+                </tr>
+                <tr>
+                  <td align="center">
+                    <!-- Кнопка Багхантить -->
+                    <table border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin:0; padding:0;">
+                      <tr>
+                        <td bgcolor="#163bff" style="background-color:#163bff; padding:8px 16px;">
                           <!--[if mso]>
                           <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="#" style="height:40px; v-text-anchor:middle; width:140px;" arcsize="8%" stroke="f" fillcolor="#163bff">
                             <w:anchorlock/>
@@ -118,39 +151,52 @@
                           </v:roundrect>
                           <![endif]-->
                           <!--[if !mso]><!-- -->
-                          <a href="#" target="_blank" rel="noopener noreferrer" class="button" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:400; line-height:100%; color:#ffffff; text-decoration:none; padding:8px 16px; display:block;">
+                          <a href="#" target="_blank" rel="noopener noreferrer" class="button" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:400; line-height:100%; color:#ffffff; text-decoration:none; display:block;">
                             Багхантить
                           </a>
                           <!--<![endif]-->
                         </td>
                       </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-              <!-- Описание вендора -->
-              <tr>
-                <td class="mobile-padding" style="color:#141A20; padding:40px 40px 64px;">
-                  <p style="font-family:Arial, Helvetica, sans-serif; font-size:32px; font-weight:bold; padding-bottom:8px;">Вендор</p>
-                  <p style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; padding-bottom:0;">
+          <!-- Описание вендора -->
+          <tr>
+            <td class="mobile-padding" style="padding:40px 40px 64px;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin:0; padding:0;">
+                <tr>
+                  <td style="font-family:Arial, Helvetica, sans-serif; font-size:32px; font-weight:bold; color:#141A20; padding-bottom:8px;">Вендор</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; color:#141A20; padding-bottom:0;">
                     СОГАЗ — крупнейший в России страховщик федерального уровня, который предоставляет более 100 программ страхования для частных лиц и предприятий.
-                  </p>
-                </td>
-              </tr>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-              <!-- Баннер + подписка -->
-              <tr>
-                <td align="center" bgcolor="#163BFF" class="mobile-padding" style="background-color:#163BFF; color:#ffffff; padding:18px 0 28px;">
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bugbounty-programs-banner.png" width="600" alt="Программы, выплаты, митапы и прочие багбаунти-радости на BI.ZONE" style="display:block; width:100%; height:auto; border:0; -ms-interpolation-mode:bicubic;" />
-                  </a>
-                  
-                  <!-- Кнопка Подписаться -->
-                  <table border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin:0; padding:0;">
-                    <tbody>
+          <!-- Баннер + подписка -->
+          <tr>
+            <td align="center" bgcolor="#163BFF" class="mobile-padding" style="background-color:#163BFF; padding:18px 0 28px;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin:0; padding:0;">
+                <tr>
+                  <td style="padding-bottom:10px;">
+                    <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                      <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bugbounty-programs-banner.png" width="600" height="80" alt="Программы, выплаты, митапы и прочие багбаунти-радости на BI.ZONE" style="display:block; width:100%; height:auto; border:none; -ms-interpolation-mode:bicubic;" />
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center">
+                    <!-- Кнопка Подписаться -->
+                    <table border="0" cellspacing="0" cellpadding="0" class="mobile-center" style="margin:0; padding:0;">
                       <tr>
-                        <td align="center" bgcolor="#000000" style="background-color:#000000;">
+                        <td bgcolor="#000000" style="background-color:#000000; padding:8px 16px;">
                           <!--[if mso]>
                           <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="#" style="height:32px; v-text-anchor:middle; width:120px;" arcsize="8%" stroke="f" fillcolor="#000000">
                             <w:anchorlock/>
@@ -158,84 +204,116 @@
                           </v:roundrect>
                           <![endif]-->
                           <!--[if !mso]><!-- -->
-                          <a href="#" target="_blank" rel="noopener noreferrer" class="button" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:400; line-height:100%; letter-spacing:0.5px; color:#ffffff; text-decoration:none; padding:8px 16px; display:block;">
+                          <a href="#" target="_blank" rel="noopener noreferrer" class="button" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:400; line-height:100%; letter-spacing:0.5px; color:#ffffff; text-decoration:none; display:block;">
                             Подписаться
                           </a>
                           <!--<![endif]-->
                         </td>
                       </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-              <!-- Футер -->
-              <tr>
-                <td bgcolor="#000000" style="background-color:#000000; padding:30px; color:#ffffff; font-size:14px; line-height:20px;">
-                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
-                    <tbody>
+          <!-- Футер -->
+          <tr>
+            <td bgcolor="#000000" class="mobile-padding" style="background-color:#000000; padding:30px;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
+                <tr>
+                  <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
                       <tr valign="top">
-                        <td align="left" style="font-size:12px; line-height:20px; color:#ffffff;">
-                          <p style="font-family:Arial, Helvetica, sans-serif; padding-bottom:10px;">Технические вопросы:
-                            <a href="#" style="color:#ffffff; font-family:Arial, Helvetica, sans-serif; border-bottom:1px solid #ffffff; text-decoration:none;">bb@bi.zone</a>
-                          </p>
-                          <p style="padding-bottom:20px;">
-                            <a href="#" target="_blank" rel="noopener noreferrer" style="color:#ffffff; font-family:Arial, Helvetica, sans-serif; border-bottom:1px solid #ffffff; text-decoration:none;">Политика конфиденциальности</a>
-                          </p>
+                        <td align="left">
+                          <table border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
+                            <tr>
+                              <td style="font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:12px; line-height:20px; color:#ffffff;">
+                                Технические вопросы:
+                                <a href="#" style="font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:12px; line-height:20px; color:#ffffff; text-decoration:none; border-bottom:1px solid #ffffff;">
+                                  bb@bi.zone
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding-bottom:20px;">
+                                <table border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
+                                  <tr>
+                                    <td style="color:#ffffff; border-bottom:1px solid #ffffff;">
+                                      <a href="#" target="_blank" rel="noopener noreferrer" style="font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:12px; color:#ffffff; text-decoration:none;">
+                                        Политика&nbsp;конфиденциальности
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
                         </td>
                         <td align="right">
                           <a href="#" target="_blank" rel="noopener noreferrer">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-logo.png" alt="BI.ZONE" width="135" height="24" style="display:block; border:0; -ms-interpolation-mode:bicubic;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-logo.png" alt="BI.ZONE" width="135" height="24" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
                           </a>
                         </td>
                       </tr>
-                    </tbody>
-                  </table>
-
-                  <p style="font-family:Arial, Helvetica, sans-serif; padding-bottom:8px;">BI.ZONE в соцсетях</p>
-
-                  <table border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
-                    <tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:12px; line-height:20px; color:#ffffff; padding-bottom:8px;">BI.ZONE в соцсетях</td>
+                </tr>
+                <tr>
+                  <td>
+                    <table border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
                       <tr>
                         <td style="padding-right:14px;">
-                          <a href="#" target="_blank" rel="noopener noreferrer">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-telegram.png" alt="BI.ZONE в Telegram" width="32" style="display:block; border:0; -ms-interpolation-mode:bicubic;">
+                          <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-telegram.png" alt="BI.ZONE в Telegram" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
                           </a>
                         </td>
                         <td style="padding-right:14px;">
-                          <a href="#" target="_blank" rel="noopener noreferrer">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-vk.png" alt="BI.ZONE в VK" width="32" style="display:block; border:0; -ms-interpolation-mode:bicubic;">
+                          <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-vk.png" alt="BI.ZONE в VK" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
                           </a>
                         </td>
                         <td style="padding-right:14px;">
-                          <a href="#" target="_blank" rel="noopener noreferrer">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-youtube.png" alt="BI.ZONE в YouTube" width="32" style="display:block; border:0; -ms-interpolation-mode:bicubic;">
+                          <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-youtube.png" alt="BI.ZONE в YouTube" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
                           </a>
                         </td>
                         <td style="padding-right:14px;">
-                          <a href="#" target="_blank" rel="noopener noreferrer">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-habr.png" alt="BI.ZONE в Habr" width="32" style="display:block; border:0; -ms-interpolation-mode:bicubic;">
+                          <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-habr.png" alt="BI.ZONE в Habr" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
                           </a>
                         </td>
                         <td>
-                          <a href="#" target="_blank" rel="noopener noreferrer">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-linkedin.png" alt="BI.ZONE в LinkedIn" width="32" style="display:block; border:0; -ms-interpolation-mode:bicubic;">
+                          <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-linkedin.png" alt="BI.ZONE в LinkedIn" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
                           </a>
                         </td>
                       </tr>
-                    </tbody>
-                  </table>
-
-                  <p style="padding-top:40px;">
-                    <a href="#" target="_blank" rel="noopener noreferrer" style="color:#565B66; font-family:Arial, Helvetica, sans-serif; border-bottom:1px solid #565B66; text-decoration:none;">Отписаться от рассылки</a>
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-    </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
+                      <tr>
+                        <td style="padding-top:40px; border-bottom:1px solid #565B66;">
+                          <a href="#" target="_blank" rel="noopener noreferrer" style="color:#565B66; font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:12px; text-decoration:none;">
+                            Отписаться от рассылки
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
   </table>
 </body>
 </html>
