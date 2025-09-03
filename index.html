@@ -1,11 +1,12 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="x-apple-disable-message-reformatting">
-  <meta name="format-detection" content="telephone=no,email=no,address=no">
+  <meta name="format-detection" content="telephone=no,email=no,address=no,date=no,address=no" />
   <title>BI.ZONE Bug Bounty</title>
 
   <!-- Фиксы для iOS и Gmail -->
@@ -15,11 +16,11 @@
       margin:0; 
       padding:0;
       border: 0;
+      line-height: normal !important;
     }
     a[x-apple-data-detectors],
     a[href^="tel"],
     a[href^="mailto"] {
-      color: inherit !important;
       text-decoration: none !important;
       border-bottom: none !important;
     }
@@ -51,11 +52,18 @@
         text-decoration: none !important;
       }
     </style>
+
+    /* Outlook DPI-фикс */
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
   <![endif]-->
 </head>
 <body bgcolor="#f5f5f5" style="margin:0; padding:0; -webkit-text-size-adjust:none; -ms-text-size-adjust:100%; -moz-text-size-adjust:100%; text-size-adjust:100%; background-color:#f5f5f5;">
   <!-- Preheader -->
-  <div style="display:none; max-height:0; overflow:hidden; font-family:Arial, Helvetica, sans-serif; font-size:1px; color:#f5f5f5; line-height:1px; opacity:0;">
+  <div style="display:none; visibility:hidden; mso-hide:all; max-height:0; overflow:hidden; font-family:Arial, Helvetica, sans-serif; font-size:1px; color:#f5f5f5; line-height:1px; opacity:0;">
     СОГАЗ запустил программу на BI.ZONE Bug Bounty. Проверь детали и получи до 50 000 рублей за найденные баги!
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
@@ -68,7 +76,7 @@
           <tr>
             <td>
               <a href="#" target="_blank" rel="noopener noreferrer">
-                <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/sogaz-bugbounty-banner.jpg" width="600" height="250" alt="СОГАЗ запускает программу Bug Bounty на платформе BI.ZONE" style="display:block; width:100%; height:auto; border:none; -ms-interpolation-mode:bicubic;" />
+                <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/sogaz-bugbounty-banner.jpg" alt="СОГАЗ запускает программу Bug Bounty на платформе BI.ZONE" border="0" width="600" height="250" style="display:block; width:100%; height:auto; border:none; -ms-interpolation-mode:bicubic;"/>
               </a>
             </td>
           </tr>
@@ -88,7 +96,7 @@
                     <!-- Линия -->
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
                       <tr>
-                        <td style="color:#CBD2DF; border-bottom:2px solid #CBD2DF; line-height:1px; font-size:0;">&nbsp;</td>
+                        <td style="color:#CBD2DF; border-bottom:2px solid #CBD2DF;"></td>
                       </tr>
                     </table>
                   </td>
@@ -187,7 +195,7 @@
                 <tr>
                   <td style="padding-bottom:10px;">
                     <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                      <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bugbounty-programs-banner.png" width="600" height="80" alt="Программы, выплаты, митапы и прочие багбаунти-радости на BI.ZONE" style="display:block; width:100%; height:auto; border:none; -ms-interpolation-mode:bicubic;" />
+                      <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bugbounty-programs-banner.png" alt="Программы, выплаты, митапы и прочие багбаунти-радости на BI.ZONE" border="0" width="600" height="80" style="display:block; width:100%; height:auto; border:none; -ms-interpolation-mode:bicubic;"/>
                     </a>
                   </td>
                 </tr>
@@ -222,21 +230,29 @@
             <td bgcolor="#000000" class="mobile-padding" style="background-color:#000000; padding:30px;">
               <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
                 <tr>
-                  <td>
+                  <td style="padding-bottom:40px;">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
                       <tr valign="top">
                         <td align="left">
                           <table border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
                             <tr>
-                              <td style="font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:12px; line-height:20px; color:#ffffff;">
-                                Технические вопросы:
-                                <a href="#" style="font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:12px; line-height:20px; color:#ffffff; text-decoration:none; border-bottom:1px solid #ffffff;">
-                                  bb@bi.zone
-                                </a>
+                              <td style="padding-bottom:8px;">
+                                <table border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
+                                  <tr>
+                                    <td style="font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:12px; color:#ffffff;">
+                                      Технические вопросы:&nbsp;
+                                    </td>
+                                    <td style="border-bottom:1px solid #ffffff;">
+                                      <a href="#" style="font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:12px; color:#ffffff; text-decoration:none;">
+                                        bb@bi.zone
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
                               </td>
                             </tr>
                             <tr>
-                              <td style="padding-bottom:20px;">
+                              <td>
                                 <table border="0" cellspacing="0" cellpadding="0" style="margin:0; padding:0;">
                                   <tr>
                                     <td style="color:#ffffff; border-bottom:1px solid #ffffff;">
@@ -252,7 +268,7 @@
                         </td>
                         <td align="right">
                           <a href="#" target="_blank" rel="noopener noreferrer">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-logo.png" alt="BI.ZONE" width="135" height="24" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-logo.png" alt="BI.ZONE" border="0" width="135" height="24" style="display:block; border:none; -ms-interpolation-mode:bicubic;"/>
                           </a>
                         </td>
                       </tr>
@@ -268,27 +284,27 @@
                       <tr>
                         <td style="padding-right:14px;">
                           <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-telegram.png" alt="BI.ZONE в Telegram" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-telegram.png" alt="BI.ZONE в Telegram" border="0" width="23" height="23" style="display:block; border:none; -ms-interpolation-mode:bicubic;"/>
                           </a>
                         </td>
                         <td style="padding-right:14px;">
                           <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-vk.png" alt="BI.ZONE в VK" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-vk.png" alt="BI.ZONE в VK" width="23" height="23" border="0" style="display:block; border:none; -ms-interpolation-mode:bicubic;"/>
                           </a>
                         </td>
                         <td style="padding-right:14px;">
                           <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-youtube.png" alt="BI.ZONE в YouTube" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-youtube.png" alt="BI.ZONE в YouTube" border="0" width="23" height="23" style="display:block; border:none; -ms-interpolation-mode:bicubic;"/>
                           </a>
                         </td>
                         <td style="padding-right:14px;">
                           <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-habr.png" alt="BI.ZONE в Habr" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-habr.png" alt="BI.ZONE в Habr" width="23" height="23" border="0" style="display:block; border:none; -ms-interpolation-mode:bicubic;"/>
                           </a>
                         </td>
                         <td>
                           <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-linkedin.png" alt="BI.ZONE в LinkedIn" width="32" style="display:block; border:none; -ms-interpolation-mode:bicubic;">
+                            <img src="https://xxbatf0qpo6871xg.public.blob.vercel-storage.com/bi-zone-email-letter/bi-zone-linkedin.png" alt="BI.ZONE в LinkedIn" border="0" width="23" height="23" style="display:block; border:none; -ms-interpolation-mode:bicubic;"/>
                           </a>
                         </td>
                       </tr>
